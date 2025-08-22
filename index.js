@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { FAIL } from "./utilities/successWords.js";
 import questionRouter from "./routes/question.routes.js";
+import answerRouter from "./routes/answers.routes.js";
 dotenv.config();
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/questions", questionRouter);
+app.use("/api/answers", answerRouter);
 // Catch all invalid routes
 app.use((req, res) => {
   return res.status(404).json({
