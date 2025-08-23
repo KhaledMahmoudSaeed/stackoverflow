@@ -1,9 +1,9 @@
-import moonoose, { model } from "mongoose";
+import mongoose from "mongoose";
 
-const answerSchema = new moonoose.Schema(
+const answerSchema = new mongoose.Schema(
   {
     questionId: {
-      type: moonoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Question",
       required: true,
     },

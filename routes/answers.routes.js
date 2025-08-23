@@ -1,8 +1,7 @@
-import express from 'express';
-
+import express from "express";
 
 import {
-    index,
+  index,
   show,
   create,
   update,
@@ -16,4 +15,5 @@ router.get("/:id", show);
 router.post("/", create);
 router.put("/:id", update);
 router.delete("/:id", destroy);
+
 export default router;
