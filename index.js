@@ -3,8 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { FAIL } from "./utilities/successWords.js";
-import teamRouter from "./routes/team.routes.js";
-import matchRouter from "./routes/match.routes.js";
+import questionRouter from "./routes/question.routes.js";
 dotenv.config();
 
 const app = express();
@@ -12,8 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/teams", teamRouter);
-app.use("/api/matches", matchRouter);
+app.use("/api/questions", questionRouter);
 // Catch all invalid routes
 app.use((req, res) => {
   return res.status(404).json({

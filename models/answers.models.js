@@ -14,4 +14,4 @@ const answerSchema = new moonoose.Schema(
   }
 );
 
-model.exports = moonoose.model("Answer", answerSchema);
+export default mongoose.model("Answer", answerSchema);

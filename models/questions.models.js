@@ -1,6 +1,6 @@
-import moonoose, { model } from "mongoose";
+import mongoose from "mongoose";
 
-const questionSchema = new moonoose.Schema(
+const questionSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
@@ -10,4 +10,4 @@ const questionSchema = new moonoose.Schema(
   }
 );
 
-model.exports = moonoose.model("Question", questionSchema);
+export default mongoose.model("Question", questionSchema);
