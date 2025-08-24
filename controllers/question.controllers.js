@@ -1,13 +1,19 @@
 import { asyncWarper } from "../middleware/asyncWrapper.js";
 import QUESTION from "../models/questions.models.js";
 import { errorHandler } from "../utilities/errorHandler.js";
-export const index = asyncWarper(async (req, res) => {
-  const questions = await QUESTION.find(
-    {},
-    { __v: 0, createdAt: 0, updatedAt: 0 }
-  );
+export const index = asyncWarper(async (req, res, next) => {
+  let questions;
+  if (req.query.category) {
+    const category = req.query.category;
+    questions = await QUESTION.find(
+      { category: new RegExp(category, "i") },
+      { __v: 0, createdAt: 0, updatedAt: 0 }
+    );
+  } else {
+    questions = await QUESTION.find({}, { __v: 0, createdAt: 0, updatedAt: 0 });
+  }
   if (questions.length === 0) {
-    return next(errorHandler.create.create("No questions found", "fail", 404));
+    return next(errorHandler.create("No questions found", "fail", 404));
   }
   res.status(200).json({
     success: true,
@@ -76,11 +82,6 @@ export const destroy = asyncWarper(async (req, res, next) => {
   });
 });
 export const findByCategory = asyncWarper(async (req, res, next) => {
-  const category = req.params.category;
-  const questions = await QUESTION.find(
-    { category },
-    { __v: 0, createdAt: 0, updatedAt: 0 }
-  );
   if (questions.length === 0) {
     return next(errorHandler.create("No questions found", "fail", 404));
   }
