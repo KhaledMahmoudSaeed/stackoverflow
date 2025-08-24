@@ -43,7 +43,12 @@ export const create = asyncWarper(async (req, res, next) => {
   if (!title || !description || !category) {
     return next(errorHandler.create("missed paramter", "fail", 400));
   }
-  const question = await QUESTION.create({ category, title, description });
+  const question = await QUESTION.create({
+    category,
+    title,
+    description,
+    user: req.user.id,
+  });
   res.status(201).json({
     success: true,
     status: 201,

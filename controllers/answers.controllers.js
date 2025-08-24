@@ -33,7 +33,7 @@ export const create = asyncWarper(async (req, res, next) => {
   if (!req.body.questionId || !req.body.answer) {
     return next(errorHandler.create("missed paramter", "fail", 400));
   }
-  const answer = await ANSWER.create(req.body);
+  const answer = await ANSWER.create({ ...req.body, user: req.user.id });
   if (!answer) {
     return next(errorHandler.create("Answer not created", "fail", 404));
   }

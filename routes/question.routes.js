@@ -7,13 +7,14 @@ import {
   destroy,
   findByCategory,
 } from "../controllers/question.controllers.js";
+import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
 
 router.get("/", index);
 router.get("/:id", show);
-router.post("/", create);
-router.put("/:id", update);
-router.delete("/:id", destroy);
+router.post("/", auth, create);
+router.put("/:id", auth, update);
+router.delete("/:id", auth, destroy);
 router.get("/category/:category", findByCategory);
 export default router;

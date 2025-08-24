@@ -15,6 +15,8 @@ app.use(express.json());
 
 app.use("/api/questions", questionRouter);
 app.use("/api/answers", answerRouter);
+import usersRouter from "./routes/users.routes.js";
+app.use("/api/users", usersRouter);
 // Catch all invalid routes
 app.use(invaildRouter);
 app.use(errorDisplay);
